@@ -1,0 +1,7 @@
+# Máquina: ISIS1304-14
+
+Dirección IP: 172.24.101.114
+
+Usuario: estudiante
+
+Contraseña: FPkhXDz62cYG85
