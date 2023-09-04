@@ -4,6 +4,10 @@ O = ["north", "south", "west", "east"]
 S = ["left", "right"]
 TURN = ["around"]
 ADV = ["front", "back"]
+NT = ["north", "south", "west", "east", "left", "right", "around", "front", "back",
+    "DEFV", "DEFP", "{", "}", ";", "EQ", "O", "S", "V", "TURN", "ADV", "IF", "ELS",
+    "WHL", "RPT", "TMS", "JMP", "WLK", "LP", "TRN", "DRP", "GET", "GRB", "LETGO", 
+    "NOP", "TRNTO", "FCN", "CAN", "NOT"]
 
 def lexer(src):
     lista_tokens = []
@@ -72,19 +76,26 @@ def id(termino):
         tipo = "FCN"
     elif checkCan(termino):
         tipo = "CAN"
+    elif checkNot(termino):
+        tipo = "NOT"
     elif checkParametro(termino):
         lista_parametros_token = []
         termino = termino[1:-1]
         lista_parametros = termino.split(",")
         for i in lista_parametros:
             lista_parametros_token.append(id(i))
-        tipo = lista_parametros_token[0:-1]
+        tipo = lista_parametros_token
     elif checkParentesis(termino):
         lista_parentesis_token = []
-        lista_parentesis = re.split(r'[()]', termino)
+        lista_parentesis_token2 = []
+        lista_parentesis = re.split(r'\(', termino)
         for i in lista_parentesis:
-            lista_parentesis_token.append(id(i))
-        tipo = lista_parentesis_token[0:-1]
+            param = id(i)
+            param = param.split(",")
+            for e in param:
+                lista_parentesis_token2.append(id(e))
+            lista_parentesis_token.append(lista_parentesis_token2)
+        tipo = lista_parentesis_token
     else:
         tipo = termino
     return tipo
@@ -176,11 +187,14 @@ def checkFacing(termino):
 def checkCan(termino):
     return termino.lower() == "can"
 
+def checkNot(termino):
+    return termino.lower() == "not:"
+
 def checkParametro(termino):
     return re.match(r'^\(.+\)$', termino)
 
 def checkParentesis(termino):
-    return "(" in termino
+    return "(" in termino and ")" in termino
 
 
 
