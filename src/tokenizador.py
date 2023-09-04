@@ -1,5 +1,7 @@
 import re 
 
+O = ["north", "south", "west", "east"]
+
 def lexer(src):
     lista_tokens = []
     doc =  open(src, "r")
@@ -11,11 +13,44 @@ def lexer(src):
     return lista_tokens
 
 def id(termino):
-    if checkDef(termino):
-        tipo = "DEF"
-        return tipo
+    if checkDefVar(termino):
+        tipo = "DEFV"
+    elif checkDefProc(termino):
+        tipo = "DEFP"
+    elif checkOpenBr(termino):
+        tipo = "{"
+    elif checkCloseBr(termino):
+        tipo = "}"
+    elif checkSep(termino):
+        tipo = ";"
+    elif checkEquals(termino):
+        tipo = "EQ"
+    elif checkO(termino):
+        tipo = "O"
     else:
-        return False
+        tipo = False
+    return tipo
+
+def checkDefVar(termino):
+    return termino.lower() == "defvar"
+
+def checkDefProc(termino):
+    return termino.lower() == "defproc"
+
+def checkOpenBr(termino):
+    return termino.lower() == "{"
+
+def checkCloseBr(termino):
+    return termino.lower() == "}"
+
+def checkSep(termino):
+    return termino.lower() == ";"
+
+def checkEquals(termino):
+    return termino.lower() == "="
+
+def checkO(termino):
+    return termino.lower() in O
 
 
 lexer("maquina-virtual.txt")
