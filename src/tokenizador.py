@@ -198,5 +198,4 @@ def checkParentesis(termino):
 
 
 
-print(lexer("maquina-virtual.txt"))
 
