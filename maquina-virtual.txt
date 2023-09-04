@@ -17,6 +17,6 @@ defProc goWest ()
     if can(walk(1,west)) { walk(1,west) } else nop()
 }
 {
-    jump (3 ,3) ;
-    putCB (2 ,1)
+    jump(3,3);
+    putCB(2,1)
 }
