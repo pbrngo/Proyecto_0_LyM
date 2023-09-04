@@ -63,11 +63,15 @@ def id(termino):
     elif checkGrab(termino):
         tipo = "GRB"
     elif checkLetGo(termino):
-        tipo = "LETG"
+        tipo = "LETGO"
     elif checkNop(termino):
         tipo = "NOP"
     elif checkTurnTo(termino):
         tipo = "TRNTO"
+    elif checkFacing(termino):
+        tipo = "FCN"
+    elif checkCan(termino):
+        tipo = "CAN"
     elif checkParametro(termino):
         lista_parametros_token = []
         termino = termino[1:-1]
@@ -166,6 +170,11 @@ def checkNop(termino):
 def checkTurnTo(termino):
     return termino.lower() == "turnto"
 
+def checkFacing(termino):
+    return termino.lower() == "facing"
+
+def checkCan(termino):
+    return termino.lower() == "can"
 
 def checkParametro(termino):
     return re.match(r'^\(.+\)$', termino)
