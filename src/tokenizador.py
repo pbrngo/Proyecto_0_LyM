@@ -4,6 +4,7 @@ O = ["north", "south", "west", "east"]
 S = ["left", "right"]
 TURN = ["around"]
 ADV = ["front", "back"]
+
 def lexer(src):
     lista_tokens = []
     doc =  open(src, "r")
