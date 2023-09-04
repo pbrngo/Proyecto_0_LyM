@@ -8,7 +8,7 @@ def lexer(src):
     txt = doc.read()
     lista_str = re.split(r'\s+', txt)
     for i in lista_str:
-        lista_tokens[i] = id(i)
+        lista_tokens.append(id(i))
 
     return lista_tokens
 
@@ -53,5 +53,5 @@ def checkO(termino):
     return termino.lower() in O
 
 
-lexer("maquina-virtual.txt")
+print(lexer("maquina-virtual.txt"))
 
