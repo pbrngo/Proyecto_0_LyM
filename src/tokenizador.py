@@ -38,8 +38,31 @@ def id(termino):
         tipo = "TURN"
     elif checkAdv(termino):
         tipo = "ADV"
+    elif checkIf(termino):
+        tipo = "IF"
+    elif checkElse(termino):
+        tipo = "ELS"
+    elif checkWhile(termino):
+        tipo = "WHL"
+    elif checkRepeat(termino):
+        tipo = "RPT"
+    elif checkIf(termino):
+        tipo = "TMS"
+    elif checkParametro(termino):
+        lista_parametros_token = []
+        termino = termino[1:-1]
+        lista_parametros = termino.split(",")
+        for i in lista_parametros:
+            lista_parametros_token.append(id(i))
+        tipo = lista_parametros_token[0:-1]
+    elif checkParentesis(termino):
+        lista_parentesis_token = []
+        lista_parentesis = re.split(r'[()]', termino)
+        for i in lista_parentesis:
+            lista_parentesis_token.append(id(i))
+        tipo = lista_parentesis_token[0:-1]
     else:
-        tipo = False
+        tipo = termino
     return tipo
 
 def checkDefVar(termino):
@@ -74,6 +97,28 @@ def checkTurn(termino):
 
 def checkAdv(termino):
     return termino.lower() in ADV
+
+def checkIf(termino):
+    return termino.lower() == "if"
+
+def checkElse(termino):
+    return termino.lower() == "else"
+
+def checkWhile(termino):
+    return termino.lower() == "while"
+
+def checkRepeat(termino):
+    return termino.lower() == "repeat"
+
+def checkTimes(termino):
+    return termino.lower() == "times"
+
+def checkParametro(termino):
+    return re.match(r'^\(.+\)$', termino)
+
+def checkParentesis(termino):
+    return "(" in termino
+
 
 
 print(lexer("maquina-virtual.txt"))
