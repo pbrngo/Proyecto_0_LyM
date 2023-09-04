@@ -1,7 +1,9 @@
 import re 
 
 O = ["north", "south", "west", "east"]
-
+S = ["left", "right"]
+TURN = ["around"]
+ADV = ["front", "back"]
 def lexer(src):
     lista_tokens = []
     doc =  open(src, "r")
@@ -27,6 +29,14 @@ def id(termino):
         tipo = "EQ"
     elif checkO(termino):
         tipo = "O"
+    elif checkS(termino):
+        tipo = "S"
+    elif checkV(termino):
+        tipo = "V"
+    elif checkTurn(termino):
+        tipo = "TURN"
+    elif checkAdv(termino):
+        tipo = "ADV"
     else:
         tipo = False
     return tipo
@@ -51,6 +61,18 @@ def checkEquals(termino):
 
 def checkO(termino):
     return termino.lower() in O
+
+def checkS(termino):
+    return termino.lower() in S
+
+def checkV(termino):
+    return termino.isdigit()
+
+def checkTurn(termino):
+    return termino.lower() in TURN
+
+def checkAdv(termino):
+    return termino.lower() in ADV
 
 
 print(lexer("maquina-virtual.txt"))
