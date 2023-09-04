@@ -48,6 +48,26 @@ def id(termino):
         tipo = "RPT"
     elif checkIf(termino):
         tipo = "TMS"
+    elif checkJump(termino):
+        tipo = "JMP"
+    elif checkWalk(termino):
+        tipo = "WLK"
+    elif checkLeap(termino):
+        tipo = "LP"
+    elif checkTurn(termino):
+        tipo = "TRN"
+    elif checkDrop(termino):
+        tipo = "DRP"
+    elif checkGet(termino):
+        tipo = "GET"
+    elif checkGrab(termino):
+        tipo = "GRB"
+    elif checkLetGo(termino):
+        tipo = "LETG"
+    elif checkNop(termino):
+        tipo = "NOP"
+    elif checkTurnTo(termino):
+        tipo = "TRNTO"
     elif checkParametro(termino):
         lista_parametros_token = []
         termino = termino[1:-1]
@@ -112,6 +132,40 @@ def checkRepeat(termino):
 
 def checkTimes(termino):
     return termino.lower() == "times"
+
+def checkJump(termino):
+    return termino.lower() == "jump"
+
+def checkWalk(termino):
+    return termino.lower() == "walk"
+
+def checkLeap(termino):
+    return termino.lower() == "leap"
+
+def checkTurn(termino):
+    return termino.lower() == "turn"
+
+def checkDrop(termino):
+    return termino.lower() == "drop"
+
+def checkDrop(termino):
+    return termino.lower() == "drop"
+
+def checkGet(termino):
+    return termino.lower() == "get"
+
+def checkGrab(termino):
+    return termino.lower() == "grab"
+
+def checkLetGo(termino):
+    return termino.lower() == "letgo"
+
+def checkNop(termino):
+    return termino.lower() == "nop"
+
+def checkTurnTo(termino):
+    return termino.lower() == "turnto"
+
 
 def checkParametro(termino):
     return re.match(r'^\(.+\)$', termino)
