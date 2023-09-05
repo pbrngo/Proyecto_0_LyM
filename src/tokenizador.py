@@ -11,13 +11,19 @@ NT = ["north", "south", "west", "east", "left", "right", "around", "front", "bac
 
 def lexer(src):
     lista_tokens = []
+    lista_tokens_aplanada = []
     doc =  open(src, "r")
     txt = doc.read()
     lista_str = re.split(r'\s+', txt)
     for i in lista_str:
         lista_tokens.append(id(i))
-
-    return lista_tokens
+    for e in lista_tokens:
+        if type(e) == list:
+            for a in e:
+                lista_tokens_aplanada.append(a)
+        else:
+            lista_tokens_aplanada.append(e)
+    return lista_tokens_aplanada
 
 def id(termino):
     if checkDefVar(termino):
@@ -78,23 +84,18 @@ def id(termino):
         tipo = "CAN"
     elif checkNot(termino):
         tipo = "NOT"
-    elif checkParametro(termino):
-        lista_parametros_token = []
-        termino = termino[1:-1]
-        lista_parametros = termino.split(",")
-        for i in lista_parametros:
-            lista_parametros_token.append(id(i))
-        tipo = lista_parametros_token
+    elif checkParentesisA(termino):
+        tipo = "("
+    elif checkParentesisC(termino):
+        tipo = ")"
+    elif checkComa(termino):
+        tipo = ","
     elif checkParentesis(termino):
         lista_parentesis_token = []
-        lista_parentesis_token2 = []
-        lista_parentesis = re.split(r'\(', termino)
+        lista_parentesis = re.findall(r'[(),]|[^(),]+', termino)
         for i in lista_parentesis:
             param = id(i)
-            param = param.split(",")
-            for e in param:
-                lista_parentesis_token2.append(id(e))
-            lista_parentesis_token.append(lista_parentesis_token2)
+            lista_parentesis_token.append(param)
         tipo = lista_parentesis_token
     else:
         tipo = termino
@@ -190,12 +191,16 @@ def checkCan(termino):
 def checkNot(termino):
     return termino.lower() == "not:"
 
-def checkParametro(termino):
-    return re.match(r'^\(.+\)$', termino)
+def checkParentesisA(termino):
+    return termino.lower() == "("
+
+def checkParentesisC(termino):
+    return termino.lower() == ")"
+
+def checkComa(termino):
+    return termino.lower() == ","
 
 def checkParentesis(termino):
     return "(" in termino and ")" in termino
-
-
 
 
