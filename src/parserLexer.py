@@ -1,4 +1,5 @@
 import nltk
+#biblioteca para tokenizar, si sale error hacer pip install nklt
 
 variables = []
 parametros = []
