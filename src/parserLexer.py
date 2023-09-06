@@ -1,4 +1,4 @@
-variables = ["a"]
+variables = []
 parametros = []
 comandos = ["walk", "jump", "leap", "turn", "turnto", "drop", "grab", "get", "letGo", "nop"]
 control_estructure = ["if", "while", "repeatTimes"]
@@ -114,7 +114,7 @@ curly brackets
                     esIB = False
                 else:
                     continue
-    return esIB
+    return True
 
 def isCommand(token):
     """
