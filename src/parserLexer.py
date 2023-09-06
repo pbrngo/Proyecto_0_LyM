@@ -1,3 +1,5 @@
+import nltk
+
 variables = []
 parametros = []
 comandos = ["walk", "jump", "leap", "turn", "turnto", "drop", "grab", "get", "letGo", "nop"]
