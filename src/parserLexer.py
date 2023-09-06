@@ -27,15 +27,18 @@ def verificador(archivo_programa):
     #ultima_linea = programa.readlines()[-1]
     linea = programa.readline()
     linea =linea.lower()
-    while(linea and esPrograma == True):
-            if isVAR(linea) == False and linea != "\n":
-                esPrograma = False
-            elif isProcedureDefinition(linea, programa) == False and linea != "\n":
-                esPrograma = False
-            elif isInstructionBlock(programa) == False and linea != "\n":
-                esPrograma = False
-            else:
-                linea = programa.readline()
+    while(linea and esPrograma):
+        if isInstructionBlock(programa) == False and isProcedureDefinition(linea, programa) == False and isVAR(linea) == False and linea != "\n":
+            esPrograma = False
+        else:
+            linea = programa.readline()
+        """
+        elif isProcedureDefinition(linea, programa) == False and linea != "\n":
+            esPrograma = False
+        elif isInstructionBlock(programa) == False and linea != "\n":
+            esPrograma = False
+        """
+
     programa.close()
     return esPrograma
 
@@ -117,7 +120,7 @@ curly brackets
                     esIB = False
                 else:
                     continue
-    return True
+    return esIB
 
 def isCommand(token):
     """
