@@ -26,6 +26,7 @@ def verificador(archivo_programa):
     #primera_linea = programa.readline()
     #ultima_linea = programa.readlines()[-1]
     linea = programa.readline()
+    linea =linea.lower()
     while(linea and esPrograma == True):
             if isVAR(linea) == False and linea != "\n":
                 esPrograma = False
@@ -183,8 +184,8 @@ def isControlStructure(token):
     Verifica que un token sea un Control Structure
     """
     esCD = True
-    #if (condition){Block1} else {Block2} fi
-    #if (condition){Block1} fi
+    #if (condition){Block1} else {Block2} 
+    #if (condition){Block1} 
     if token[0] == "if":
         con = token[2:(token.index(")", 2)) + 1]
         bloque1 = token[token.index("{") + 1 :token.index("}")]
@@ -192,8 +193,6 @@ def isControlStructure(token):
             esCD = False
         elif token.index("{") == -1 or token.index("}") == -1:
             esCD = False
-        elif token[-1] != "fi":
-            esCD == False
         elif isCommand(bloque1) == False:
             esCD = False
         else:
@@ -247,4 +246,3 @@ def isCondition(token):
 print(verificador("maquina-virtual.txt"))
 
 #print(verificador("\Users\ACER\Downloads\Proyecto_0_LyM-main\Proyecto_0_LyM-main\maquina-virtual.txt"))
-
