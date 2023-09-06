@@ -54,7 +54,7 @@ def isVAR(linea):
     linea = linea.split()
     if (linea[0] != "defvar"):
         esVar = False
-    elif (numero != linea[-1][-1]):
+    elif (linea[-1][-1] not in numero):
         esVar = False
     else:
         for x in range(1, len(linea[1:]) + 1):
