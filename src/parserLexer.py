@@ -1,12 +1,7 @@
-from asyncore import read
-import string
-
-
 variables = ["a"]
 parametros = []
 comandos = ["walk", "jump", "leap", "turn", "turnto", "drop", "grab", "get", "letGo", "nop"]
 control_estructure = ["if", "while", "repeatTimes"]
-alfabeto = string.ascii_letters
 condiciones = ["facing","can", "not"]
 o = ["north", "south", "west", "east"]
 d_min = ["front", "left", "right", "back"]
@@ -43,23 +38,20 @@ def verificador(archivo_programa):
 
 def isVAR(linea):
     """
-    – A variable definition starts with the keyword defVar followed by a name followed by an initial value.
-    – A procedure definition starts with the keyword defProc followed by by a name,
+    A variable definition starts with the keyword defVar followed by a name followed by an initial value.
+    A procedure definition starts with the keyword defProc followed by by a name,
     followed by a list of parameter in parenthesis separated by commas, followed
     by a block of commands.
     """
     esVar = True
     linea = linea.split()
-    if (linea[0] != "defVAR"):
+    if (linea[0] != "defvar"):
         esVar = False
     elif (numero != linea[-1][-1]):
         esVar = False
     else:
         for x in range(1, len(linea[1:]) + 1):
             try:
-                if (linea[x][0] not in alfabeto):
-                    esVar = False
-                    break
                 variable = linea[x].replace(",", "")
                 variable = variable.replace(";", "")
                 variables.append(variable)
@@ -78,7 +70,7 @@ by a block of commands.
 
     #para encontrar los parametros
     ubicacionParentesis = linea.find("(")
-    if tokenPROC != "defProf" or ubicacionParentesis == -1 or linea[ubicacionParentesis - 1] not in string.ascii_letters:
+    if tokenPROC != "defproc" or ubicacionParentesis == -1:
         esPD = False
     else:
         losParametros = linea[ubicacionParentesis:].replace("(", "").split()
@@ -114,7 +106,7 @@ curly brackets
                 continue
             else:
                 token = nltk.word_tokenize(linea.replace(", ", " "))
-                if (token[0] == "defProc" or linea == "{") and abierto:
+                if (token[0] == "defproc" or linea == "{") and abierto:
                     esIB = False
                 elif isCommand(token) == False and linea != "\n":
                     esIB = False
@@ -172,7 +164,7 @@ def isCommand(token):
         elif token[0] == "get":
             if token[2] not in numero:
                 esC = False
-        elif token[0] == "letGo":
+        elif token[0] == "letgo":
             if token[2] not in numero:
                 esC = False
         elif token[0] == "nop":
