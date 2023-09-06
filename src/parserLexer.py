@@ -172,7 +172,7 @@ def isCommand(token):
         elif token[0] == "letgo":
             if token[2] not in numero:
                 esC = False
-        elif token[0] == "nop":
+        elif token[0] == "nop":  #nop()
             if token[2] not in vacio:
                 esC = False
     
