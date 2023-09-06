@@ -150,8 +150,7 @@ def isCommand(token):
                 if (token[3] not in numero and token[3] not in variables and token[3] not in parametros):
                     esC = False
                 elif (token[2] not in o and token[2] not in d_min):
-                    esC = False
-            
+                    esC = False   
         elif token[0] == "turn":
             if token[2] not in d_may:
                     esC = False
