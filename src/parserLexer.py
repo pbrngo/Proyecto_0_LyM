@@ -1,15 +1,15 @@
 import nltk
 #biblioteca para tokenizar, si sale error hacer pip install nklt
 
-variables = []
+variables = [] #almacenar variables  (value)
 parametros = []
 comandos = ["walk", "jump", "leap", "turn", "turnto", "drop", "grab", "get", "letGo", "nop"]
 control_estructure = ["if", "while", "repeatTimes"]
 condiciones = ["facing","can", "not"]
 o = ["north", "south", "west", "east"]
 d_min = ["front", "left", "right", "back"]
-d_may = ["left", "right", "around"]
-numero = ["0","1","2","3","4","5","6","7","8","9"]
+d_may = ["left", "right", "around"]  #para turn
+numero = ["0","1","2","3","4","5","6","7","8","9"] #(value)
 vacio = []
 
 def verificador(archivo_programa):
@@ -236,7 +236,8 @@ def isCondition(token):
             if token[2] not in o:
                 esCon = False
         elif token[0] == "can":
-            if (token[2] not in d_min and token[2] not in o) or (token[3] not in numero and token[3] not in variables and token[3] not in parametros):
+            comando = isCommand(token[2])
+            if comando == False:
                 esCon = False
         elif token[0] == "not":
             condicion_valido = isCondition(token[2])
